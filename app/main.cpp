@@ -23,8 +23,6 @@
 #include <gst/video/videooverlay.h>
 #include <gst/wayland/wayland.h>
 
-#define DEFAULT_VIDEO_DEVICE	"/dev/video0"
-
 // these only applies if the window is a dialog/pop-up one
 // by default the compositor make the window maximized
 #define WINDOW_WIDTH_SIZE	640
@@ -669,7 +667,7 @@ int main(int argc, char *argv[])
 
 	memset(pipeline_str, 0, sizeof(pipeline_str));
 	snprintf(pipeline_str, sizeof(pipeline_str), "v4l2src device=%s ! video/x-raw,width=%d,height=%d ! waylandsink", 
-		DEFAULT_VIDEO_DEVICE, WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+		get_camera_device(), WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	gst_init(&gargc, &gargv);
 
 	setbuf(stdout, NULL);

@@ -1,10 +1,16 @@
 #include <sys/mman.h>
+#include <sys/types.h>
+#include <sys/ioctl.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <dirent.h>
 #include <assert.h>
 #include <cstdlib>
 #include <cstring>
 #include <cerrno>
+#include <cstdio>
+#include <cctype>
+#include <linux/videodev2.h>
 
 #include "utils.h"
 
@@ -147,4 +153,45 @@ os_create_anonymous_file(off_t size)
 #endif
 
 	return fd;
+}
+
+const char*
+get_camera_device(void)
+{
+	DIR *dir = opendir("/dev");
+	if (!dir) {
+		perror("Couldn't open the '/dev' directory");
+		return NULL;
+	}
+
+	static char device[PATH_MAX];
+	bool found = false;
+	while (struct dirent *dirent = readdir(dir)) {
+		if (strncmp(dirent->d_name, "video", strlen("video")))
+			continue;
+		if (!isdigit(dirent->d_name[strlen("video")]))
+			continue;
+
+		strcpy(device, "/dev/");
+		strncat(device, dirent->d_name, sizeof(device) - 1);
+
+		int fd = open(device, O_RDWR);
+		if (fd == -1)
+			continue;
+		struct v4l2_capability vid_cap;
+		if (ioctl(fd, VIDIOC_QUERYCAP, &vid_cap) < 0) {
+			close(fd);
+			continue;
+		}
+		close(fd);
+
+		if ((vid_cap.capabilities & V4L2_CAP_VIDEO_CAPTURE) ||
+			(vid_cap.capabilities & V4L2_CAP_VIDEO_CAPTURE_MPLANE)) {
+			found = true;
+			break;
+		}
+	}
+
+	closedir(dir);
+	return found ? device : NULL;
 }
