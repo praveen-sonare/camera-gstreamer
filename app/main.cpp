@@ -677,7 +677,7 @@ int main(int argc, char *argv[])
 	GstElement *pipeline = gst_parse_launch(pipeline_str, &error);
 	if (error || !pipeline) {
 		fprintf(stderr, "gstreamer pipeline construction failed!\n");
-		free(argv);
+		free(gargv);
 		return EXIT_FAILURE;
 	}
 
@@ -700,7 +700,7 @@ int main(int argc, char *argv[])
 	window = create_window(display, WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE, app_id); 
 
 	if (!window) {
-		free(argv);
+		free(gargv);
 		return EXIT_FAILURE;
 	}
 
@@ -731,7 +731,7 @@ int main(int argc, char *argv[])
 
 	destroy_window(window);
 	destroy_display(display);
-	free(argv);
+	free(gargv);
 
 	gst_element_set_state(pipeline, GST_STATE_NULL);
 	gst_object_unref(pipeline);
