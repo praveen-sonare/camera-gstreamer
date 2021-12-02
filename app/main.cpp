@@ -672,6 +672,8 @@ int main(int argc, char *argv[])
 		DEFAULT_VIDEO_DEVICE, WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	gst_init(&gargc, &gargv);
 
+	setbuf(stdout, NULL);
+
 	fprintf(stdout, "Using pipeline: %s\n", pipeline_str);
 
 	GstElement *pipeline = gst_parse_launch(pipeline_str, &error);
