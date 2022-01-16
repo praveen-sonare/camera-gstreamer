@@ -669,7 +669,7 @@ int main(int argc, char *argv[])
 
 	memset(pipeline_str, 0, sizeof(pipeline_str));
 	snprintf(pipeline_str, sizeof(pipeline_str), "v4l2src device=%s ! video/x-raw,width=%d,height=%d ! waylandsink", 
-		get_camera_device(), WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+		get_first_camera_device(), WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	gst_init(&gargc, &gargv);
 
 	setbuf(stdout, NULL);

@@ -156,7 +156,7 @@ os_create_anonymous_file(off_t size)
 }
 
 const char*
-get_camera_device(void)
+get_first_camera_device(void)
 {
 	DIR *dir = opendir("/dev");
 	if (!dir) {
@@ -165,20 +165,22 @@ get_camera_device(void)
 	}
 
 	static char device[PATH_MAX];
+	struct dirent *dirent;
 	bool found = false;
-	while (struct dirent *dirent = readdir(dir)) {
-		if (strncmp(dirent->d_name, "video", strlen("video")))
+	while ((dirent = readdir(dir)) != NULL) {
+		struct v4l2_capability vid_cap;
+		int fd;
+
+		if (strcmp(dirent->d_name, "video"))
 			continue;
-		if (!isdigit(dirent->d_name[strlen("video")]))
+		if (!isdigit(dirent->d_name[5]))
 			continue;
 
-		strcpy(device, "/dev/");
-		strncat(device, dirent->d_name, sizeof(device) - 1);
+		snprintf(device, sizeof(device), "/dev/%s", dirent->d_name);
 
-		int fd = open(device, O_RDWR);
+		fd = open(device, O_RDWR);
 		if (fd == -1)
 			continue;
-		struct v4l2_capability vid_cap;
 		if (ioctl(fd, VIDIOC_QUERYCAP, &vid_cap) < 0) {
 			close(fd);
 			continue;

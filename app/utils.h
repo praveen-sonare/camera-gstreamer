@@ -9,7 +9,7 @@ int
 os_create_anonymous_file(off_t size);
 
 const char*
-get_camera_device(void);
+get_first_camera_device(void);
 
 #ifdef  __cplusplus
 }
