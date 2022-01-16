@@ -158,7 +158,7 @@ get_next_buffer(struct window *window)
 	 * the 'old' one and force creation of the buffer with the newer
 	 * dimensions */
 	if (window->wait_for_configure && window->maximized) {
-		if (!window->buffers[0].busy && window->buffers[0].buffer) {
+		if (window->buffers[0].buffer && !window->buffers[0].busy) {
 			wl_buffer_destroy(window->buffers[0].buffer);
 			window->buffers[0].buffer = NULL;
 			window->wait_for_configure = false;
