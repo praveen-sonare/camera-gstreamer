@@ -1,4 +1,5 @@
 # Copyright 2021 Collabora, Ltd.
+# Copyright 2022 Konsulko Group
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,5 +16,4 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.3)
 
-project(camera-gstreamer)
-include(${CMAKE_CURRENT_SOURCE_DIR}/conf.d/cmake/config.cmake)
+add_subdirectory(app)
