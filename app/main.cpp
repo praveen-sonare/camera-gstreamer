@@ -668,8 +668,9 @@ int main(int argc, char *argv[])
 	gargv[1] = strdup("--gst-debug-level=2");
 
 	memset(pipeline_str, 0, sizeof(pipeline_str));
-	snprintf(pipeline_str, sizeof(pipeline_str), "v4l2src device=%s ! video/x-raw,width=%d,height=%d ! waylandsink", 
-		DEFAULT_VIDEO_DEVICE, WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+	//snprintf(pipeline_str, sizeof(pipeline_str), "v4l2src device=%s ! video/x-raw,width=%d,height=%d ! waylandsink", 
+	//	DEFAULT_VIDEO_DEVICE, WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+	snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	gst_init(&gargc, &gargv);
 
 	fprintf(stdout, "Using pipeline: %s\n", pipeline_str);
