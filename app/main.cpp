@@ -675,7 +675,7 @@ int main(int argc, char *argv[])
 	//snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 
 	// Below is for webvideo
-	snprintf(pipeline_str, sizeof(pipeline_str), "playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm");
+	snprintf(pipeline_str, sizeof(pipeline_str), "playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm video-sink=waylandsink");
 	gst_init(&gargc, &gargv);
 
 	setbuf(stdout, NULL);
