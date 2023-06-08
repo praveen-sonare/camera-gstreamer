@@ -670,7 +670,12 @@ int main(int argc, char *argv[])
 	memset(pipeline_str, 0, sizeof(pipeline_str));
 	//snprintf(pipeline_str, sizeof(pipeline_str), "v4l2src device=%s ! video/x-raw,width=%d,height=%d ! waylandsink", 
 	//	get_first_camera_device(), WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
-	snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+	
+	// Below test pipeline is working
+	//snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+
+	// Below is for webvideo
+	snprintf(pipeline_str, sizeof(pipeline_str), "playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm");
 	gst_init(&gargc, &gargv);
 
 	setbuf(stdout, NULL);
