@@ -675,8 +675,8 @@ int main(int argc, char *argv[])
 	//snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 
 	// Below is for webvideo
-	pipeline_str = "gst-launch-1.0 souphttpsrc location=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm ! matroskademux name=d ! queue ! vp8dec ! videoconvert ! waylandsink d. ! queue ! vorbisdec ! audioconvert ! audioresample ! autoaudiosink";
-	//snprintf(pipeline_str, sizeof(pipeline_str), "playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm video-sink=waylandsink");
+	//pipeline_str = "gst-launch-1.0 souphttpsrc location=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm ! matroskademux name=d ! queue ! vp8dec ! videoconvert ! waylandsink d. ! queue ! vorbisdec ! audioconvert ! audioresample ! autoaudiosink";
+	snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 souphttpsrc location=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm ! matroskademux name=d ! queue ! vp8dec ! videoconvert ! waylandsink d. ! queue ! vorbisdec ! audioconvert ! audioresample ! autoaudiosink");
 	gst_init(&gargc, &gargv);
 
 	setbuf(stdout, NULL);
