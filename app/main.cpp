@@ -675,7 +675,8 @@ int main(int argc, char *argv[])
 	//snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 
 	// gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux name=d ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=640,height=720 ! waylandsink
-	snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux name=d ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=%d,height=%d ! waylandsink",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+	// gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux ! queue ! v4l2h264dec ! videoconvert ! videoscale ! waylandsink
+	snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=%d,height=%d ! waylandsink",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	// audio-video pipeline (need to chosse correct audio/video decoder)
 	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux name=d ! queue ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw,width=%d,height=%d ! autovideosink d. !  queue ! avdec_aac ! audioconvert ! audioresample ! autoaudiosink",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	//pipeline_str = "gst-launch-1.0 souphttpsrc location=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm ! matroskademux name=d ! queue ! vp8dec ! videoconvert ! waylandsink d. ! queue ! vorbisdec ! audioconvert ! audioresample ! autoaudiosink";
