@@ -676,7 +676,7 @@ int main(int argc, char *argv[])
 
 	// gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux name=d ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=640,height=720 ! waylandsink
 	// gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux ! queue ! v4l2h264dec ! videoconvert ! videoscale ! waylandsink
-	snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm video-sink=\"videoconvert ! video/x-raw,width=%d,height=%d ! waylandsink\"",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+	snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm video-sink=\"videoscale ! video/x-raw,width=%d,height=%d ! waylandsink\"",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	
 	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=%d,height=%d ! waylandsink",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	// audio-video pipeline (need to chosse correct audio/video decoder)
@@ -697,7 +697,7 @@ int main(int argc, char *argv[])
 	}
 
 	receiver_data.pipeline = pipeline;
-
+ 
 	display = create_display(argc, argv);
 	if (!display)
 		return -1;
