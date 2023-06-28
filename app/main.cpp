@@ -669,14 +669,15 @@ int main(int argc, char *argv[])
 
 	memset(pipeline_str, 0, sizeof(pipeline_str));
 	//snprintf(pipeline_str, sizeof(pipeline_str), "v4l2src device=%s ! video/x-raw,width=%d,height=%d ! waylandsink", 
-	//	get_first_camera_device(), WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+	//get_first_camera_device(), WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	
 	// Below test pipeline is working
 	//snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 
 	// gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux name=d ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=640,height=720 ! waylandsink
 	// gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux ! queue ! v4l2h264dec ! videoconvert ! videoscale ! waylandsink
-	snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm video-sink=\"waylandsink\"");
+	snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! waylandsink");
+	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm video-sink=\"waylandsink\"");
 	
 	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=%d,height=%d ! waylandsink",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	// audio-video pipeline (need to chosse correct audio/video decoder)
