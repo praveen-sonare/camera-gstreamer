@@ -671,8 +671,8 @@ int main(int argc, char *argv[])
 	//snprintf(pipeline_str, sizeof(pipeline_str), "v4l2src device=%s ! video/x-raw,width=%d,height=%d ! waylandsink", 
 	//get_first_camera_device(), WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	
-	// Below test pipeline is working
-	//snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
+	// Below test pipeline is working with test video
+	snprintf(pipeline_str, sizeof(pipeline_str), "videotestsrc pattern=18 ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 
 	// gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux name=d ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=640,height=720 ! waylandsink
 	// gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux ! queue ! v4l2h264dec ! videoconvert ! videoscale ! waylandsink
@@ -680,7 +680,7 @@ int main(int argc, char *argv[])
 	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 playbin uri=https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm video-sink=\"waylandsink\"");
 	// image display
 	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/pic/g4.png ! pngdec ! videoconvert ! videoscale ! video/x-raw,width=%d,height=%d ! waylandsink", WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
-	snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/pic/1.png ! pngdec ! videoconvert ! videoscale ! video/x-raw,width=1440,height=2128 ! waylandsink");
+	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/pic/1.png ! pngdec ! videoconvert ! videoscale ! video/x-raw,width=1440,height=2128 ! waylandsink");
 	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux ! queue ! v4l2h264dec ! videoconvert ! videoscale ! video/x-raw,width=%d,height=%d ! waylandsink",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
 	// audio-video pipeline (need to chosse correct audio/video decoder)
 	//snprintf(pipeline_str, sizeof(pipeline_str), "gst-launch-1.0 filesrc location=/media/UNTITLED/shrek2.mp4 ! qtdemux name=d ! queue ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw,width=%d,height=%d ! autovideosink d. !  queue ! avdec_aac ! audioconvert ! audioresample ! autoaudiosink",WINDOW_WIDTH_SIZE, WINDOW_HEIGHT_SIZE);
